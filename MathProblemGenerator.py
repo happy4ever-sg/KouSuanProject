@@ -74,18 +74,5 @@ KeyProblemTypeMapping = {
     'grade1_a_renjiao_1to5_compare': gen_grade1_a_renjiao_1to5_compare
 }
 
-if __name__ == '__main__':
-    #TEST
-    problem_nums = [5, 10, 50, 100, 500, 1000]
-    problem_key = 'grade1_a_renjiao_1to5_compare'
-    func = KeyProblemTypeMapping[problem_key]
-    for num in problem_nums:
-        print(f"===TEST NUM: {num}====")
-        start_time = time.time()
-        ans = func(num)
-        end_time = time.time()
-        print(ans)
-        cost_ms = (end_time - start_time) * 1000
-        print(f"===COST: {cost_ms} ms===================\n")
 
 
