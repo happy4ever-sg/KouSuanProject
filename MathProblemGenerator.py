@@ -24,27 +24,13 @@ def gen_grade1_a_renjiao_1to5_compare(num):
             base_res.append((problem_str, ans_str))
 
     # step2. fill
-    final_res=[]
-    while len(final_res) < num:
-        # shuffle
-        random.shuffle(base_res)
-
-        last_num = num - len(final_res)
-        if last_num <= len(base_res):
-            final_res.extend(base_res[:last_num])
-        else:
-            final_res.extend(base_res)
+    final_res=get_filled_res(base_res, num)
 
     # step3. adjust
     random.shuffle(base_res)
 
-    # remove duplicate
-    for idx in range(len(final_res)):
-        if idx > 0 and final_res[idx][0] == final_res[idx-1][0]:
-            for res in base_res:
-                # random replace
-                if res[0] != final_res[idx][0]:
-                    final_res[idx] = res
+    # remove consequent duplicate
+    final_res = get_consequent_dedup_res(final_res, base_res)
 
     # remove consequent compare
     for idx in range(len(final_res)):
@@ -67,11 +53,32 @@ def gen_grade1_a_renjiao_1to5_compare(num):
 
     return final_res
 
+# 一年级；上；人教版 1~5的认识和加减法；5以内的加法
+def gen_grade1_a_renjiao_1to5_addition(num):
+    # step1. display all
+    base_res = []
+    for i in range(1, 5, 1):
+        for j in range(1, 5, 1):
+            if i + j <= 5:
+                problem_str = f"{i}+{j}=_"
+                ans_str = f"{i}+{j}={i+j}"
+                base_res.append((problem_str, ans_str))
+
+    # step2. fill
+    final_res = get_filled_res(base_res, num)
+
+    # step3. adjsut
+    random.shuffle(base_res)
+    final_res = get_consequent_dedup_res(final_res, base_res)
+
+    return final_res
+
 ######################################
 
 # key to problem func mapping
 KeyProblemTypeMapping = {
-    'grade1_a_renjiao_1to5_compare': gen_grade1_a_renjiao_1to5_compare
+    'grade1_a_renjiao_chapter1_section1': gen_grade1_a_renjiao_1to5_compare,
+    'grade1_a_renjiao_chapter1_section2': gen_grade1_a_renjiao_1to5_addition
 }
 
 

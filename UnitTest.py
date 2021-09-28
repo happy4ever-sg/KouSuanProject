@@ -10,7 +10,7 @@ from MathProblemGenerator import *
 
 if __name__ == '__main__':
     problem_nums = [5, 10, 50, 100, 500, 1000]
-    problem_key = 'grade1_a_renjiao_1to5_compare'
+    problem_key = 'grade1_a_renjiao_chapter1_section2'
     func = KeyProblemTypeMapping[problem_key]
     for num in problem_nums:
         print(f"===TEST NUM: {num}====")
