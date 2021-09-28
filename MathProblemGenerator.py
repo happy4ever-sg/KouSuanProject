@@ -24,7 +24,7 @@ def gen_grade1_a_renjiao_1to5_compare(num):
             base_res.append((problem_str, ans_str))
 
     # step2. fill
-    final_res=get_filled_res(base_res, num)
+    final_res = get_random_filled_res(base_res, num)
 
     # step3. adjust
     random.shuffle(base_res)
@@ -65,7 +65,7 @@ def gen_grade1_a_renjiao_1to5_addition(num):
                 base_res.append((problem_str, ans_str))
 
     # step2. fill
-    final_res = get_filled_res(base_res, num)
+    final_res = get_random_filled_res(base_res, num)
 
     # step3. adjsut
     random.shuffle(base_res)
@@ -73,12 +73,78 @@ def gen_grade1_a_renjiao_1to5_addition(num):
 
     return final_res
 
+# 一年级；上；人教版 1~5的认识和加减法；5以内的减法
+def gen_grade1_a_renjiao_1to5_subtraction(num):
+    # step1. display all
+    base_res = []
+    for i in range(1, 5, 1):
+        for j in range(1, 5, 1):
+            if 0 <= i - j <= 5:
+                problem_str = f"{i}-{j}=_"
+                ans_str = f"{i}-{j}={i - j}"
+                base_res.append((problem_str, ans_str))
+
+    # step2. fill
+    final_res = get_random_filled_res(base_res, num)
+
+    # step3. adjsut
+    random.shuffle(base_res)
+    final_res = get_consequent_dedup_res(final_res, base_res)
+
+    return final_res
+
+# 一年级；上；人教版 1~5的认识和加减法；0的认识和加减法
+def gen_grade1_a_renjiao_1to5_contains0(num):
+    # step1. display all
+    base_res = []
+    for i in range(0, 5, 1):
+        problem_str = f"{i}+0=_"
+        ans_str = f"{i}+0={i}"
+        base_res.append((problem_str, ans_str))
+
+    for i in range(0, 5, 1):
+        problem_str = f"0+{i}=_"
+        ans_str = f"0+{i}={i}"
+        base_res.append((problem_str, ans_str))
+
+    for i in range(0, 5, 1):
+        problem_str = f"{i}-0=_"
+        ans_str = f"{i}-0={i}"
+        base_res.append((problem_str, ans_str))
+
+    for i in range(0, 5, 1):
+        problem_str = f"{i}-{i}=_"
+        ans_str = f"{i}-{i}=0"
+        base_res.append((problem_str, ans_str))
+
+    # step2. fill
+    final_res = get_random_filled_res(base_res, num)
+
+    # step3. adjsut
+    random.shuffle(base_res)
+    final_res = get_consequent_dedup_res(final_res, base_res)
+
+    return final_res
+
+# 一年级；上；人教版 1~5的认识和加减法；1~5的加减法随机出题
+def gen_grade1_a_renjiao_1to5_getrandom(num):
+    half_num = (int)(num / 2)
+    addition_problems = gen_grade1_a_renjiao_1to5_addition(half_num)
+    subtraction_problems = gen_grade1_a_renjiao_1to5_subtraction(half_num)
+    final_res = addition_problems + subtraction_problems
+    random.shuffle(final_res)
+    return final_res
+
 ######################################
 
 # key to problem func mapping
 KeyProblemTypeMapping = {
     'grade1_a_renjiao_chapter1_section1': gen_grade1_a_renjiao_1to5_compare,
-    'grade1_a_renjiao_chapter1_section2': gen_grade1_a_renjiao_1to5_addition
+    'grade1_a_renjiao_chapter1_section2': gen_grade1_a_renjiao_1to5_addition,
+    'grade1_a_renjiao_chapter1_section3': gen_grade1_a_renjiao_1to5_subtraction,
+    'grade1_a_renjiao_chapter1_section4': gen_grade1_a_renjiao_1to5_contains0,
+    'grade1_a_renjiao_chapter1_section5': gen_grade1_a_renjiao_1to5_getrandom,
+
 }
 
 

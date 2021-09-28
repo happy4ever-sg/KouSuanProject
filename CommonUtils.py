@@ -25,7 +25,7 @@ def extract_compare_sign(compare_ans_str):
     return "="
 
 # 填充函数
-def get_filled_res(base_res, num):
+def get_random_filled_res(base_res, num):
     final_res=[]
     while len(final_res) < num:
         # shuffle
