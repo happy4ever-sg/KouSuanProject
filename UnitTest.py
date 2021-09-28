@@ -9,11 +9,11 @@
 from MathProblemGenerator import *
 
 if __name__ == '__main__':
-    problem_nums = [5, 10, 50, 100, 500, 1000]
-    problem_key = 'grade1_a_renjiao_chapter1_section2'
+    problem_nums = [10, 50, 100, 500, 1000]
+    problem_key = 'grade1_a_renjiao_chapter1_section5'
     func = KeyProblemTypeMapping[problem_key]
     for num in problem_nums:
-        print(f"===TEST NUM: {num}====")
+        print(f"===TEST NUM: {num}, FUNC NAME: {func.__name__}====")
         start_time = time.time()
         ans = func(num)
         end_time = time.time()
